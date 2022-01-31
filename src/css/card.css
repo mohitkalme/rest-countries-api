@@ -34,3 +34,9 @@
     font-weight: 600;
     margin-bottom: 0.6875rem;
 }
+@media screen and (max-width:676px) {
+    .card{
+        max-width: 23rem;
+        margin: auto;
+    }
+}

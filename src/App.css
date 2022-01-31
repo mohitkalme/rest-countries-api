@@ -5,6 +5,7 @@ header{
  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
  position: sticky;
  top: 0;
+ z-index: 3;
 }
 
 nav{
@@ -29,4 +30,23 @@ nav > h1{
 }
 .theme-switcher-icon{
    margin-left: 10px;
+}
+
+@media screen and (max-width: 1294px) {
+    header{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+@media screen and (max-width:510px) {
+    header{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    nav > h1{
+        font-size: 1.25rem;
+    }
+    .theme-switcher{
+        font-size: 1rem;
+    }
 }
