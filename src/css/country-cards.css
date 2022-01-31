@@ -24,7 +24,7 @@ form{
   display: flex;
   align-items: center;
   color: var(--text-color);
-  background-color: rgba(239,239,239, 1);
+  background-color: var(--card-background);
   border: 0;
   outline: 0;
   margin: 0;
@@ -34,6 +34,7 @@ form{
   padding-right: 2rem;
   border-radius: 5px;
   width: 29.875rem;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
 }
 .dark .input-box{
   background-color: hsl(209, 23%, 22%);
@@ -46,6 +47,7 @@ form{
   background-color: transparent;
   margin-left: 1.5rem;
   flex: 1;
+
 }
 .NO-RESULTS{
  text-align: center;
@@ -73,4 +75,37 @@ form{
 
 .light .error-message{
   color: #3c4043;
+}
+
+@media screen and (max-width:1290px) {
+  main{
+    padding: 0 2rem;
+  }
+}
+@media screen and (max-width: 1120px) {
+  .cards{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 922px) {
+  .cards{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 768px) {
+  .input-section{
+    flex-direction: column;
+  }
+  .input-box{
+    margin-bottom: 3rem;
+    max-width: 20rem;
+
+  }
+  .search-input{
+  }
+}
+@media screen and (max-width: 676px) {
+  .cards{
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

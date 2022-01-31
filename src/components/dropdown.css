@@ -5,6 +5,7 @@
     user-select: none;
     border-radius: 5px;
     color: var(--text-color);
+    z-index: 2;
 }
  .dropdown-btn{
     padding:1rem;
