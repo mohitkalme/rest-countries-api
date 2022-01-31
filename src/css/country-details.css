@@ -1,0 +1,38 @@
+.details-main{
+    background-color: var(--background);
+    height: 100vh;
+}
+
+.country-details{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7rem;
+    padding-top:5rem;
+}
+.m-auto{
+    margin: auto;
+}
+.card-title{
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text-color);
+}
+.card-main{
+    padding-top: 2.75rem;
+    padding-bottom: 2rem;
+}
+.card-box{
+    display: grid;
+    margin-top: 2rem;
+    grid-template-columns: repeat(2,1fr);
+}
+.card-ul{
+    list-style: none;
+}
+.card-list{
+    color:var(--text-color);
+    margin-bottom: 0.875rem;
+}
+.font-600{
+    font-weight: 600;
+}
