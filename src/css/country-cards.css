@@ -101,11 +101,20 @@ form{
     max-width: 20rem;
 
   }
-  .search-input{
-  }
+
 }
 @media screen and (max-width: 676px) {
   .cards{
     grid-template-columns: repeat(1, 1fr);
   }
+  .error-emoji{
+      font: 100px/1.25 Google Sans,Helvetica Neue,sans-serif;
+  
+  }
+  
+}
+@media screen and (max-width: 510px) {
+  main{
+    padding: 0 1rem;
+}
 }

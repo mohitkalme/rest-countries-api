@@ -40,3 +40,9 @@
         margin: auto;
     }
 }
+@media screen and (max-width: 510px) {
+  
+  .card{
+    max-width: 16rem;
+  }
+  }
