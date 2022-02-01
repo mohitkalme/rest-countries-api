@@ -7,10 +7,11 @@ export default function CountryDetails() {
   let params = useParams();
 
   const [fetchData, setFetchData] = useState([]);
+
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/name/${params.id}`)
       .then((res) => res.json())
-      .then((data) => setFetchData(data));
+      .then((data) => {setFetchData(data); console.log(data)});
   }, [params.id]);
 
   return (
@@ -22,6 +23,7 @@ export default function CountryDetails() {
 
           return (
             <main >
+              
               <Link to={`/`} className="no-link">
               <div className="back-badge">
                 <div className="arrow-left">
