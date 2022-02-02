@@ -98,7 +98,7 @@ form{
   }
   .input-box{
     margin-bottom: 3rem;
-    max-width: 20rem;
+    width: 100%;
 
   }
 
