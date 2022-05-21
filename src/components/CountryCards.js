@@ -8,7 +8,7 @@ export default function CountryCards(props) {
   const API_ENDPOINT = "https://restcountries.com/v3.1/name/";
 
   const [urlParams, setUrlParams] = useState(
-    "germany,united states of america,brazil,iceland,united kingdom,albania,algeria,india"
+    "e"
   );
   const [url, setUrl] = useState(`${API_ENDPOINT}${urlParams}`);
   const [fetchData, setFetchData] = useState([]);
@@ -56,7 +56,7 @@ export default function CountryCards(props) {
   // ------------------------------------ For Select Tag ------------------------------
   const API_ENDPOINT_REGION = "https://restcountries.com/v3.1/region/";
 
-const [regionName, setRegionName] = useState('');
+const [regionName, setRegionName] = useState('Asia');
 
 
   const handleFetchRegion = React.useCallback(() => {
