@@ -1,11 +1,11 @@
 import "./dropdown.css";
 import { useState } from "react";
-export default function Dropdown({regionName,setRegionName}) {
+export default function Dropdown({ regionName, setRegionName }) {
   const [isActive, setIsActive] = useState(false);
   return (
     <div className="dropdown">
-      <div className="dropdown-btn" onClick={()=>setIsActive(!isActive)}>
-        <p>{regionName ? regionName : 'Filter by Region'}</p>
+      <div className="dropdown-btn" onClick={() => setIsActive(!isActive)}>
+        <p>{regionName ? regionName : "Filter by Region"}</p>
         <div className="chevron-down">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -24,11 +24,51 @@ export default function Dropdown({regionName,setRegionName}) {
       </div>
       {isActive && (
         <div className="dropdown-content">
-          <div className="dropdown-item" onClick={()=>{setRegionName('Asia');setIsActive(!isActive)}}>Asia</div>
-          <div className="dropdown-item" onClick={()=>{setRegionName('Europe');setIsActive(!isActive)}}>Europe</div>
-          <div className="dropdown-item" onClick={()=>{setRegionName('Oceania');setIsActive(!isActive)}}>Oceania</div>
-          <div className="dropdown-item" onClick={()=>{setRegionName('Africa');setIsActive(!isActive)}}>Africa</div>
-          <div className="dropdown-item" onClick={()=>{setRegionName('America');setIsActive(!isActive)}}>America</div>
+          <div
+            className="dropdown-item"
+            onClick={() => {
+              setRegionName("Asia");
+              setIsActive(!isActive);
+            }}
+          >
+            Asia
+          </div>
+          <div
+            className="dropdown-item"
+            onClick={() => {
+              setRegionName("Europe");
+              setIsActive(!isActive);
+            }}
+          >
+            Europe
+          </div>
+          <div
+            className="dropdown-item"
+            onClick={() => {
+              setRegionName("Oceania");
+              setIsActive(!isActive);
+            }}
+          >
+            Oceania
+          </div>
+          <div
+            className="dropdown-item"
+            onClick={() => {
+              setRegionName("Africa");
+              setIsActive(!isActive);
+            }}
+          >
+            Africa
+          </div>
+          <div
+            className="dropdown-item"
+            onClick={() => {
+              setRegionName("America");
+              setIsActive(!isActive);
+            }}
+          >
+            America
+          </div>
         </div>
       )}
     </div>

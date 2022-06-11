@@ -11,7 +11,10 @@ export default function CountryDetails() {
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/name/${params.id}`)
       .then((res) => res.json())
-      .then((data) => {setFetchData(data); console.log(data)});
+      .then((data) => {
+        setFetchData(data);
+        console.log(data);
+      });
   }, [params.id]);
 
   return (
@@ -22,28 +25,27 @@ export default function CountryDetails() {
           let currencies = Object.values(item.currencies);
 
           return (
-            <main >
-              
+            <main>
               <Link to={`/`} className="no-link">
-              <div className="back-badge">
-                <div className="arrow-left">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-arrow-left"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-                    />
-                  </svg>
-                </div>
+                <div className="back-badge">
+                  <div className="arrow-left">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-arrow-left"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                      />
+                    </svg>
+                  </div>
 
-                <p>Back</p>
-              </div>
+                  <p>Back</p>
+                </div>
               </Link>
               <div key={item.name.common} className="country-details">
                 <div className="country-flag">
