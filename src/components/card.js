@@ -1,7 +1,9 @@
 import "../css/card.css";
 import { Link } from "react-router-dom";
+import React from "react";
 
-export default function card({ img, name, population, region, capital }) {
+const card = React.memo(({ img, name, population, region, capital }) => {
+  console.log("card component ran");
   return (
     <Link to={`/${name}`} className="no-link card">
       <div className="card-grid">
@@ -24,4 +26,5 @@ export default function card({ img, name, population, region, capital }) {
       </div>
     </Link>
   );
-}
+});
+export default card;

@@ -1,13 +1,11 @@
-import React, { useState, } from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { Outlet, } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 function App() {
- 
   const [theme, setTheme] = useState("dark");
 
   return (
     <div className={theme}>
-    
       <header>
         <nav className="container">
           <h1>Where in the world?</h1>
