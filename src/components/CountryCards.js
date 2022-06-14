@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Card from "./card";
 import Dropdown from "./Dropdown";
 
+import MySkeleton from "./mySkeleton";
 export default function CountryCards(props) {
   const API_ENDPOINT = "https://restcountries.com/v3.1/";
 
@@ -13,8 +14,9 @@ export default function CountryCards(props) {
   const [url, setUrl] = useState(`${API_ENDPOINT}${urlParams}`);
   const [fetchData, setFetchData] = useState([]);
   const [isError, setIsError] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     setIsError(false);
     fetch(url)
       .then((res) => {
@@ -23,12 +25,15 @@ export default function CountryCards(props) {
       .then((data) => {
         if (data.status === 404) {
           setIsError(true);
+          setIsLoading(false);
           setFetchData([]);
         } else {
           setFetchData(data);
+          setIsLoading(false);
         }
       })
       .catch((err) => {
+        setIsLoading(false);
         setIsError(true);
       });
   }, [url]);
@@ -50,13 +55,18 @@ export default function CountryCards(props) {
 
   const handleFetchRegion = React.useCallback(() => {
     if (!regionName) return;
+    setIsLoading(true);
     setIsError(false);
     fetch(`${API_ENDPOINT_REGION}${regionName}`)
       .then((res) => res.json())
       .then((data) => {
         setFetchData(data);
+        setIsLoading(false);
       })
-      .catch((err) => setIsError(true));
+      .catch((err) => {
+        setIsError(true);
+        setIsLoading(false);
+      });
   }, [regionName]);
   useEffect(() => {
     handleFetchRegion();
@@ -98,14 +108,21 @@ export default function CountryCards(props) {
           ) : (
             fetchData.map((item) => {
               return (
-                <Card
-                  key={item.name.common}
-                  img={item.flags.svg}
-                  name={item.name.common}
-                  population={item.population}
-                  region={item.region}
-                  capital={item.capital}
-                />
+                <>
+                  {isLoading ? (
+                    <MySkeleton />
+                  ) : (
+                    <Card
+                      key={item.name.common}
+                      img={item.flags.svg}
+                      name={item.name.common}
+                      population={item.population}
+                      region={item.region}
+                      capital={item.capital}
+                      
+                    />
+                  )}
+                </>
               );
             })
           )}
