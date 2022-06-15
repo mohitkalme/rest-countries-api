@@ -16,8 +16,8 @@ export default function CountryCards(props) {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    setIsLoading(true);
     setIsError(false);
+    setIsLoading(true);
     fetch(url)
       .then((res) => {
         return res.json();
@@ -119,7 +119,6 @@ export default function CountryCards(props) {
                       population={item.population}
                       region={item.region}
                       capital={item.capital}
-                      
                     />
                   )}
                 </>
