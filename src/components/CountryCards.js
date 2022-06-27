@@ -1,51 +1,75 @@
 import "../css/country-cards.css";
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useReducer, useCallback } from "react";
 import Card from "./card";
 import Dropdown from "./Dropdown";
+import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import MySkeleton from "./mySkeleton";
-export default function CountryCards(props) {
-  const API_ENDPOINT = "https://restcountries.com/v3.1/";
+const API_ENDPOINT = "https://restcountries.com/v3.1/";
 
+const countryReducer = (state, action) => {
+  switch (action.type) {
+    case "COUNTRY_FETCH_INIT":
+      return {
+        ...state,
+        isError: false,
+        isLoading: true,
+      };
+    case "COUNTRY_FETCH_SUCCESS":
+      return {
+        ...state,
+        isError: false,
+        isLoading: false,
+        data: action.payload,
+      };
+    case "COUNTRY_FETCH_FAILURE":
+      return {
+        ...state,
+        isError: true,
+        isLoading: false,
+      };
+    default:
+      throw new Error();
+  }
+};
+
+export default function CountryCards() {
   const [urlParams, setUrlParams] = useState(
     `alpha?codes=PER,AUT,COL,RUS,JPN,AUS,USA,UKR`
   );
   const [url, setUrl] = useState(`${API_ENDPOINT}${urlParams}`);
-  const [fetchData, setFetchData] = useState([]);
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    setIsError(false);
-    setIsLoading(true);
-    fetch(url)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (data.status === 404) {
-          setIsError(true);
-          setIsLoading(false);
-          setFetchData([]);
-        } else {
-          setFetchData(data);
-          setIsLoading(false);
-        }
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        setIsError(true);
+
+  const [countries, dispatchCountries] = useReducer(countryReducer, {
+    data: [],
+    isLoading: false,
+    isError: false,
+  });
+
+  const handleFetchCountries = useCallback(async () => {
+    dispatchCountries({ type: "COUNTRY_FETCH_INIT" });
+    try {
+      const result = await axios.get(url);
+      dispatchCountries({
+        type: "COUNTRY_FETCH_SUCCESS",
+        payload: result.data,
       });
+    } catch (error) {
+      dispatchCountries({ type: "COUNTRY_FETCH_FAILURE" });
+    }
   }, [url]);
+
+  useEffect(() => {
+    handleFetchCountries();
+  }, [handleFetchCountries]);
+
   const handleSearchInput = (event) => {
     if (event.target.value.trim()) {
       setUrlParams(`name/${event.target.value}`);
     }
   };
   const handleSubmit = (e) => {
-    e.preventDefault();
-
     setUrl(`${API_ENDPOINT}${urlParams}`);
+    e.preventDefault();
   };
 
   // ------------------------------------ For Select Tag ------------------------------
@@ -53,21 +77,20 @@ export default function CountryCards(props) {
 
   const [regionName, setRegionName] = useState("");
 
-  const handleFetchRegion = React.useCallback(() => {
+  const handleFetchRegion = React.useCallback(async () => {
     if (!regionName) return;
-    setIsLoading(true);
-    setIsError(false);
-    fetch(`${API_ENDPOINT_REGION}${regionName}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setFetchData(data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setIsError(true);
-        setIsLoading(false);
+    dispatchCountries({ type: "COUNTRY_FETCH_INIT" });
+    try {
+      const result = await axios.get(`${API_ENDPOINT_REGION}${regionName}`);
+      dispatchCountries({
+        type: "COUNTRY_FETCH_SUCCESS",
+        payload: result.data,
       });
+    } catch (error) {
+      dispatchCountries({ type: "COUNTRY_FETCH_FAILURE" });
+    }
   }, [regionName]);
+
   useEffect(() => {
     handleFetchRegion();
   }, [handleFetchRegion]);
@@ -100,27 +123,30 @@ export default function CountryCards(props) {
           <Dropdown regionName={regionName} setRegionName={setRegionName} />
         </div>
         <div className="cards ">
-          {isError ? (
+          {countries.isError ? (
             <div className="NO-RESULTS">
               <div className="error-emoji">\(o_o)/</div>
               <div className="error-message">Can't find any country.</div>
             </div>
-          ) : (
-            fetchData.map((item) => {
+          ) : 
+          countries.isLoading ? (
+          
+            <div className="CIRCULAR_PROGRESS">
+              <CircularProgress />
+            </div>
+          ):
+          (
+            countries.data.map((item) => {
               return (
                 <>
-                  {isLoading ? (
-                    <MySkeleton />
-                  ) : (
-                    <Card
-                      key={item.name.common}
-                      img={item.flags.svg}
-                      name={item.name.common}
-                      population={item.population}
-                      region={item.region}
-                      capital={item.capital}
-                    />
-                  )}
+                  <Card
+                    key={item.name.common}
+                    img={item.flags.svg}
+                    name={item.name.common}
+                    population={item.population}
+                    region={item.region}
+                    capital={item.capital}
+                  />
                 </>
               );
             })

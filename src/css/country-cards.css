@@ -56,6 +56,12 @@ form{
   color: #e8eaed;
 
 }
+.CIRCULAR_PROGRESS{
+  text-align: center;
+  margin: auto;
+  grid-column: 1 / 5;
+  margin-top: 3rem;
+}
 
 .error-emoji{
   color: #dadce0;

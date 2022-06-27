@@ -1,46 +1,59 @@
-.dropdown{
-    width: 12.5rem;
-    background-color: var(--card-background);
-    position: relative;
-    user-select: none;
-    border-radius: 5px;
-    color: var(--text-color);
-    z-index: 2;
+.dropdown {
+  width: 12.5rem;
+  background-color: var(--card-background);
+  position: relative;
+  user-select: none;
+  border-radius: 5px;
+  color: var(--text-color);
+  z-index: 2;
 }
- .dropdown-btn{
-    padding:1rem;
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
-    cursor: pointer;
-    border-radius: 5px;
+.dropdown-btn {
+  padding: 1rem;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
+  outline: transparent solid 2px;
 }
-.chevron-down{
-    display: flex;
-    align-items: center;
+.chevron-down {
+  display: flex;
+  align-items: center;
 }
-.dropdown-content{
-    position: absolute;
-    top: 110%;
-    content: "";
-    left: 0;
-    right: 0;
-    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
-    border-radius: 5px;
-    background-color: var(--card-background);
+.dropdown-content {
+  position: absolute;
+  top: 110%;
+  content: "";
+  left: 0;
+  right: 0;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  border-radius: 5px;
+  background-color: var(--card-background);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.15s ease;
+  transform: rotateX(-15deg);
+  transform-origin: 0 0;
 }
-.dropdown-item{
-    cursor: pointer;
-    padding: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    transition: none;
+.dropdown-content.show {
+  visibility: visible;
+  opacity: 1;
+  transform: rotateX(0deg);
+  display: block;
 }
-.dropdown-item:hover{
-background-color:hsl(211, 23%, 28%);
+.dropdown-item {
+  cursor: pointer;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  transition: none;
 }
-.light .dropdown-item:hover{
-    background-color: #f4f4f4;
+.dropdown-item:hover {
+  background-color: hsl(211, 23%, 28%);
+}
+.light .dropdown-item:hover {
+  background-color: #f4f4f4;
 }
